@@ -38,13 +38,14 @@ void write_center_value(i3ds::DepthMap &dm, const unsigned int n_measurements) {
 
 void write_whole_dm(i3ds::DepthMap &dm, const unsigned int n_measurements)
 {
-    size_t size = dm.descriptor.depth_size*dm.descriptor.height*dm.descriptor.width;
     {
         std::lock_guard<std::mutex> guard(mtx);
-        for (int i = 0; i < size; ++i)
+        std::cout << "Got " << dm.depths.size() << "floats\n";
+        for (int i = 0; i < dm.depths.size(); ++i)
         {
-            logfile.write(reinterpret_cast<char*>(&descriptorsValues[i]), sizeof(float));
+            logfile << dm.depths[i] <<';';
         }
+        logfile << '\n';
         update_captured(n_measurements);
     }
 }
