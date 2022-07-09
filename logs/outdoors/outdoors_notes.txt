@@ -1,0 +1,49 @@
+Some tests have been done in the sun logging distances towards
+two flat sufaces. One cardboard surface and one black pelican style case
+The temperatures of the cameras kept mostly below 50 C.
+In some tests the results were clearly good or bad and in others, there 
+was so much noise that logs were made to record the results.
+
+
+Tests with camera facing AWAY from sun
+
+Test 1
+ Distance: 82 cm
+ Range: near
+ temp 42 C
+ Results:
+  black is invisible
+  cardboard looks good
+
+Test 2
+ Distance: 180 cm
+ Range: mid
+ Results:
+  black noisy see black_180.log
+  cardboard good
+
+Test 3
+ Distance: 300 cm
+ Range: far
+ Results:
+  black see black_300.log
+  cardboard see cardboard_300.log
+
+
+Tests with camera facing towards sun
+
+Test 1
+ Distance: 80 cm
+ Range: near
+ Results:
+  Cardboard 84
+  Black invisible
+
+Test 2
+ Distance: 180 cm
+ Range: mid
+ Results:
+  caredboard see towards_sun_180_cardboard.log
+  black see towards_sun_180_black.log
+
+
