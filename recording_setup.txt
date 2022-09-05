@@ -1,0 +1,35 @@
+To do a full recording of Vzense measurements running as node 10:
+
+1. Create a folder for the recording, referred to as <dir> here.
+2. Start the Vzense node:
+    $ i3ds_vzense_tof -c <serial_number> -n 10
+3. Start i3ds_record with the correct NodeID, EndpointID, and output file
+    $ i3ds_record -n 10 -e 128 -m 10 -o <dir>/i3ds_msgs.log
+   This will create files that can be replayed with i3ds_replay
+4. Start log_depths to store the depthmaps:
+    $ ./log_depths -n10 -m 10 -o <dir>/float_vals.log -w
+   This will store the float values of each measurement as a line of semi-
+   colon separated float values in float_vals.log
+4. Start i3ds_camera_capture to store image files
+    $ i3ds_camera_capture -n 10 -o <dir>/image --tof
+   This will create images files of the format <dir>/image_00001_0.tiff
+   NOTE: i3ds_camera_capture has no measurement limit, so we have to manually
+   stop the sensor after 10 measurements once it has started.
+5. Start the sensor. Note that i3ds_camera_capture will take focus, so you have
+   to click on the terminal again to be able to stop it.
+    $ i3ds_configure_sensor -n 10 --activate
+    $ i3ds_configure_sensor -n 10 --start
+6. Count the 10 measurements, or wait until one of the programs that have been
+   given the -m flag exits, and stop the sensor again.
+    $ i3ds_configure_sensor -n 10 --stop
+
+The directory should now contain.
+* 10 .tiff-images
+* float_vals.log: A readable file with the depthmaps
+* i3ds_msgs.log: A file that can be used to replay the measurements
+* A few other files that can be ignored.
+
+To replay the measurements, run:
+    $ i3ds_replay -i i3ds_msgs.log
+
+ 
